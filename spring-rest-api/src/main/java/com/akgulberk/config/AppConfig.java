@@ -14,7 +14,7 @@ public class AppConfig {
     public List<Employee> employeeList() {
         List<Employee> employeeList = new ArrayList<>();
         employeeList.add(new Employee("1", "Berk", "Akgül"));
-        employeeList.add(new Employee("1","Efe","Akgül"));
+        employeeList.add(new Employee("2","Efe","Akgül"));
         employeeList.add(new Employee("3","Samet","Akgül"));
         employeeList.add(new Employee("4","Yasin","Akgül"));
 
