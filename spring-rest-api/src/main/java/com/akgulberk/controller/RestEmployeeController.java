@@ -36,4 +36,9 @@ public class RestEmployeeController {
     public Employee saveEmployee(@RequestBody Employee newEmployee) {
         return employeeService.saveEmployee(newEmployee);
     }
+
+    @DeleteMapping("/delete-employee/{id}")
+    public boolean deleteEmployee(@PathVariable(name = "id") String id) {
+        return employeeService.deleteEmployee(id);
+    }
 }
