@@ -31,4 +31,9 @@ public class RestEmployeeController {
     {
         return employeeService.getEmployeeWithParams(firstName,lastName);
     }
+
+    @PostMapping("/save-employee")
+    public Employee saveEmployee(@RequestBody Employee newEmployee) {
+        return employeeService.saveEmployee(newEmployee);
+    }
 }
