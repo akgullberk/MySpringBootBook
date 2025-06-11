@@ -1,7 +1,9 @@
 package com.akgulberk.services.impl;
 
+import com.akgulberk.dto.DtoCourse;
 import com.akgulberk.dto.DtoStudent;
 import com.akgulberk.dto.DtoStudentIU;
+import com.akgulberk.entities.Course;
 import com.akgulberk.entities.Student;
 import com.akgulberk.repository.StudentRepository;
 import com.akgulberk.services.IStudentService;
@@ -44,14 +46,24 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public DtoStudent getStudentById(Integer id) {
-        DtoStudent dto = new DtoStudent();
+        DtoStudent dtoStudent  = new DtoStudent();
         Optional<Student> optional = studentRepository.findById(id);
-        if(optional.isPresent()){
-            Student dbStudent = optional.get();
-
-            BeanUtils.copyProperties(dbStudent, dto);
+        if(optional.isEmpty()){
+            return null;
         }
-        return dto;
+        Student dbStudent = optional.get();
+        BeanUtils.copyProperties(dbStudent, dtoStudent);
+
+        if (dbStudent.getCourses()!=null && !dbStudent.getCourses().isEmpty()) {
+            for (Course course : dbStudent.getCourses()) {
+                DtoCourse dtoCourse = new DtoCourse();
+                BeanUtils.copyProperties(course, dtoCourse);
+
+                dtoStudent.getCourses().add(dtoCourse);
+            }
+        }
+
+        return dtoStudent;
     }
 
     @Override
